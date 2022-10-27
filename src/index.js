@@ -1,13 +1,14 @@
-// Modules to control application life and create native browser window
 const { app, BrowserWindow } = require("electron");
 const path = require("path");
 
+const WIDTH = process.env.BROWSER_WIDTH || 800;
+const HEIGHT = process.env.BROWSER_HEIGHT || 480;
+
 function createWindow() {
     let launchTime;
-    // Create the browser window.
     const mainWindow = new BrowserWindow({
-        width: 800,
-        height: 480,
+        width: WIDTH,
+        height: HEIGHT,
         frame: false,
         alwaysOnTop: true,
         resizable: false,
@@ -19,13 +20,13 @@ function createWindow() {
         splash.destroy();
     });
 
-    mainWindow.on("unresponsive", () => {
-        console.log("unresponsive");
-    });
-
     (function connect() {
         mainWindow
-            .loadURL("http://localhost:2022")
+            .loadURL(
+                `${process.env.APP_PROTOCOL || "http"}://${process.env.APP_IP || "localhost"}:${
+                    process.env.APP_PORT || 2022
+                }`
+            )
             .then(() => {
                 const now = new Date();
                 const diff = now - launchTime;
@@ -33,13 +34,13 @@ function createWindow() {
                 else setTimeout(() => mainWindow.show(), 7000 - diff);
             })
             .catch((err) => {
-                setTimeout(connect, 5000);
+                setTimeout(connect, process.env.RECONNECT_TIMEOUT || 5000);
             });
     })();
 
     const splash = new BrowserWindow({
-        width: 800,
-        height: 480,
+        width: WIDTH,
+        height: HEIGHT,
         frame: false,
         alwaysOnTop: true,
         resizable: false,
@@ -53,9 +54,6 @@ function createWindow() {
     });
 
     splash.loadFile(path.join(__dirname, "splash.html"));
-
-    // Open the DevTools.
-    // mainWindow.webContents.openDevTools()
 }
 
 // This method will be called when Electron has finished
