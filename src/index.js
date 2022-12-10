@@ -18,6 +18,10 @@ function createWindow() {
     });
     mainWindow.on("show", () => {
         splash.destroy();
+        mainWindow.webContents.once("did-fail-load", () => {
+            app.relaunch();
+            app.exit();
+        });
     });
 
     (function connect() {
