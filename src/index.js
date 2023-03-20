@@ -2,7 +2,7 @@ const { app, BrowserWindow } = require("electron");
 const path = require("path");
 const Docker = require("dockerode");
 
-const CONTAINER_NAME = process.env.CONTAINER_NAME ?? "node-18.6.0";
+const CONTAINER_NAME = process.env.CONTAINER_NAME ?? "smarthome";
 
 const HOSTNAME = process.env.APP_HOSTNAME ?? "localhost";
 const PORT = process.env.APP_PORT ?? 3000;
