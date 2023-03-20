@@ -24,7 +24,8 @@ function restartOnContainerStop() {
       filters: {
         type: ["container"],
         container: [CONTAINER_NAME],
-        event: ["destroy", "die", "kill", "pause", "restart", "stop"],
+        // event: ["destroy", "die", "kill", "pause", "restart", "stop"],
+        event: ["die"],
       },
     },
     function (err, stream) {
