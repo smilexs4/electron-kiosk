@@ -1,0 +1,1 @@
+Simple electron based kiosk for dockerized progressive web applications
