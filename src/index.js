@@ -63,7 +63,7 @@ function waitForContainer() {
   return new Promise((resolve, reject) => {
     docker.getContainer(CONTAINER_NAME).inspect(function (err, data) {
       if (err) {
-        reject(err);
+        startContainerStartListener().then(resolve).catch(reject);
       } else {
         if (data.State.Running) {
           resolve();
@@ -104,6 +104,7 @@ async function main() {
   console.log("Waiting for container to start...");
   await waitForContainer();
   console.log("Container started");
+  restartOnContainerStop();
 
   const elapsed = new Date() - start;
 
@@ -158,7 +159,6 @@ function sleep(ms) {
 }
 
 app.whenReady().then(() => {
-  restartOnContainerStop();
   main();
 });
 
