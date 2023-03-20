@@ -5,7 +5,7 @@ const Docker = require("dockerode");
 const CONTAINER_NAME = process.env.CONTAINER_NAME ?? "smarthome";
 
 const HOSTNAME = process.env.APP_HOSTNAME ?? "localhost";
-const PORT = process.env.APP_PORT ?? 3000;
+const PORT = process.env.APP_PORT ?? 2022;
 const PROTOCOL = process.env.APP_PROTOCOL ?? "http";
 
 const WIDTH = process.env.BROWSER_WIDTH ?? 800;
