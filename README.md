@@ -10,5 +10,5 @@ Simple electron based kiosk for dockerized progressive web applications.
 ## Debugging (all interfaces)
 
 1. `npm run debug`
-2. `socat TCP-LISTEN:8315,reuseaddr,fork TCP:localhost:8315`
+2. `socat TCP-LISTEN:8315,reuseaddr,fork TCP:localhost:9222`
 3. Navigate to `ip:8315` in chrome from remote device
